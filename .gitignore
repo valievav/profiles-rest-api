@@ -122,8 +122,8 @@ dmypy.json
 ### PyCharm ###
 
 # All Pycharm generated files
-.idea
+.idea/
 
 ## other
-venv
-.vagrant
+venv/
+.vagrant/
