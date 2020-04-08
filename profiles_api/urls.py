@@ -11,5 +11,6 @@ router.register('profile', views.UserProfileViewSet)  # basename is not specifie
 
 urlpatterns = [
     path('hello-view/', views.HelloAPIView.as_view()),
+    path('login/', views.UserLoginApiView.as_view()),
     path('', include(router.urls)),  # generated urls to each viewset function
 ]
