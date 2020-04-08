@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
+from rest_framework import filters
 
 from profiles_api import serializers
 from profiles_api import models
@@ -123,7 +124,15 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     """
     Creates and updates user profile
     """
+
+    # create User Profile viewsets
     serializer_class = serializers.UserProfileSerializer
     queryset = models.UserProfile.objects.all()  # creates all viewsets for user automatically
+
+    # handle permissions
     authentication_classes = (TokenAuthentication,)
     permission_classes = (permissions.UpdateOwnProfile,)
+
+    # allow profile search
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name', 'email',)
