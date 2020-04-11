@@ -56,3 +56,9 @@ class ProfileFeedItemSerializer(serializers.ModelSerializer):
         fields = ('id', 'user_profile', 'status_text', 'created_on')
         extra_kwargs = {'user_profile': {'read_only': True}}
 
+
+class BlogPost(serializers.ModelSerializer):
+    class Meta:
+        model = models.BlogPost
+        fields = ['pk', 'user_profile', 'title', 'content', 'timestamp']
+        extra_kwargs = {'user_profile': {'read_only': True}}

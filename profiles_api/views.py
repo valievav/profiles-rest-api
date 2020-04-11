@@ -134,7 +134,7 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 
     # handle permissions
     authentication_classes = (TokenAuthentication,)
-    permission_classes = (permissions.UpdateOwnProfile,)
+    permission_classes = (permissions.UpdateOwnRecord,)
 
     # allow profile search
     filter_backends = (filters.SearchFilter,)
@@ -156,7 +156,7 @@ class UserProfileFeedViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ProfileFeedItemSerializer
     queryset = models.ProfileFeedItem.objects.all()
     permission_classes = (
-        permissions.UpdateOwnStatus,  # user can update only its status
+        permissions.UpdateOwnRecord,  # user can update only its status
         IsAuthenticated  # make API available only for authenticated users
     )
 
@@ -165,3 +165,11 @@ class UserProfileFeedViewSet(viewsets.ModelViewSet):
         Sets the user profile to the logged in user
         """
         serializer.save(user_profile=self.request.user)
+
+
+class BlogPostView(viewsets.ModelViewSet):
+    # lookup_field = 'pk'
+    queryset = models.BlogPost.objects.all()
+    serializer_class = serializers.BlogPost
+    permission_classes = (permissions.UpdateOwnRecord,
+                          IsAuthenticated,)
